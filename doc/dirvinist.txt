@@ -1,0 +1,20 @@
+Author: fsharpasharp
+Version: 0.1
+==============================================================================
+SUMMARY                                                          *dirvinist*
+
+This plugin combines vim-projectionist with vim-dirvish.
+
+    https://github.com/tpope/vim-projectionist
+    https://github.com/justinmk/vim-dirvish
+
+Calling the command :Dirvinist lists all files with their associated category.
+You may also call :Dirvinist followed by any number of categories to list
+the associated files.
+
+==============================================================================
+OPTIONS                                                  *dirvinist-options*
+
+Show categories associated with files. Default value is 1.
+
+g:dirvinist_show_headers
