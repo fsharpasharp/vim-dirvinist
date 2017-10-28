@@ -15,6 +15,6 @@ the associated files.
 ==============================================================================
 OPTIONS                                                  *dirvinist-options*
 
-Show categories associated with files. Default value is 1.
+Show types associated with files. Default value is 1.
 
 g:dirvinist_show_headers
