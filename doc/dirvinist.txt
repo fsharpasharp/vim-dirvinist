@@ -8,8 +8,8 @@ This plugin combines vim-projectionist with vim-dirvish.
     https://github.com/tpope/vim-projectionist
     https://github.com/justinmk/vim-dirvish
 
-Calling the command :Dirvinist lists all files with their associated category.
-You may also call :Dirvinist followed by any number of categories to list
+Calling the command :Dirvinist lists all files with their associated type.
+You may also call :Dirvinist followed by any number of types to list
 the associated files.
 
 ==============================================================================

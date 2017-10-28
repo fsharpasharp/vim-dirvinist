@@ -7,17 +7,16 @@ if !exists("g:dirvinist_show_headers")
     let g:dirvinist_show_headers = 1
 endif
 
-function! dirvinist#category_complete(lead, cmdline, _) abort
-    let categories = keys(projectionist#navigation_commands())
-    return filter(categories, 'v:val =~ "^".a:lead')
+function! s:list_types() abort
+    return ["alternate"] + keys(projectionist#navigation_commands())
 endfunction
 
-function! s:glob_files(category) abort
+function! s:glob_files(type) abort
     let commands = projectionist#navigation_commands()
-    if !has_key(commands, a:category)
+    if !has_key(commands, a:type)
         return
     endif
-    let variants = commands[a:category]
+    let variants = commands[a:type]
     let formats = []
     for variant in variants
         call add(formats, variant[0] . projectionist#slash() . (variant[1] =~# '\*\*'
@@ -43,20 +42,33 @@ function! s:set_buffer_settings() abort
     hi def link dirvinist Todo
 endfunction
 
+function! dirvinist#type_complete(lead, cmdline, _) abort
+    let types = s:list_types()
+    return filter(types, 'v:val =~ "^".a:lead')
+endfunction
+
 function! dirvinist#get_files(...) abort
     if empty(a:000)
-        let categories = keys(projectionist#navigation_commands())
+        let types = s:list_types()
     else
-        let categories = a:000
+        let types = a:000
     endif
     let lines = []
-    for category in categories
-        let files = s:glob_files(category)
-        if !empty(files)
-            if g:dirvinist_show_headers
-                call add(lines, "# " . category)
+    for type in types
+        if type == "alternate"
+            let alternates = projectionist#query_file('alternate')
+            if !empty(alternates)
+                call add(lines, "# " . type)
+                let lines += alternates
             endif
-            let lines += files
+        else
+            let files = s:glob_files(type)
+            if !empty(files)
+                if g:dirvinist_show_headers
+                    call add(lines, "# " . type)
+                endif
+                let lines += files
+            endif
         endif
     endfor
     let prev_folder = resolve(expand('%:p'))

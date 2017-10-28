@@ -1,1 +1,1 @@
-command! -bar -bang -nargs=* -complete=customlist,dirvinist#category_complete Dirvinist call dirvinist#get_files(<f-args>)
+command! -bar -bang -nargs=* -complete=customlist,dirvinist#type_complete Dirvinist call dirvinist#get_files(<f-args>)
