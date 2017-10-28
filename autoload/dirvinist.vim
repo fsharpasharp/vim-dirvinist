@@ -30,10 +30,9 @@ function! s:glob_files(type) abort
 endfunction
 
 function! s:set_buffer_settings() abort
-    setlocal concealcursor=nvc
-    setlocal conceallevel=3
     setlocal undolevels=-1
     setlocal ft=dirvish
+    setlocal conceallevel=0
     setlocal buftype=nofile
     setlocal bufhidden=hide
     setlocal noswapfile
