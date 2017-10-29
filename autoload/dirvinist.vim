@@ -23,8 +23,10 @@ function! s:glob_files(type) abort
             \ ? variant[1] : substitute(variant[1], '\*', '**/*', '')))
     endfor
     let files = []
-    call filter(formats, 'v:val =~# "\\*"')
     for format in formats
+        if format !~# '\*'
+            continue
+        endif
         let files += split(glob(format), '\n')
     endfor
     return files
